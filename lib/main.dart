@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_app/data/repository/stock_repository_impl.dart';
 import 'package:stock_app/data/source/local/company_listing_entity.dart';

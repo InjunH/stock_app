@@ -11,9 +11,9 @@ void main() {
   test('company_listings_view_model 생성시 데이터를 잘 가져와야 한다.', () async {
     Hive.init(null);
     Hive.registerAdapter(CompanyListingEntityAdapter());
-    final _api = StockApi();
-    final _dao = StockDao();
-    final viewModel = CompanyListingsViewModel(StockRepositoryImpl(_api, _dao));
+    final api = StockApi();
+    final dao = StockDao();
+    final viewModel = CompanyListingsViewModel(StockRepositoryImpl(api, dao));
 
     await Future.delayed(const Duration(milliseconds: 3000));
 
