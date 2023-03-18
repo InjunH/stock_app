@@ -20,7 +20,6 @@ class StockApi {
       {required String symbol, String apiKey = apiKey}) async {
     final response = await _client.get(Uri.parse(
         '$baseUrl/query?function=OVERVIEW&symbol=$symbol&apikey=$apiKey'));
-
     return CompanyInfoDto.fromJson(jsonDecode(response.body));
   }
 

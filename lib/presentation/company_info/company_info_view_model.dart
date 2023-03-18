@@ -24,6 +24,7 @@ class CompanyInfoViewModel with ChangeNotifier {
 
     result.when(
       success: (info) {
+        print(info);
         _state = state.copyWith(companyInfo: info, isLoading: false);
       },
       error: (e) {
@@ -37,9 +38,9 @@ class CompanyInfoViewModel with ChangeNotifier {
     final intradayInfo = await _repository.getIntradayInfo(symbol);
 
     intradayInfo.when(
-      success: (infos) {
+      success: (stockInfo) {
         _state = state.copyWith(
-            stockInfos: infos, isLoading: false, errorMessage: null);
+            stockInfos: stockInfo, isLoading: false, errorMessage: null);
       },
       error: (e) {
         _state = state.copyWith(
