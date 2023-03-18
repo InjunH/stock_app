@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stock_app/presentation/company_info/company_info_state.dart';
 import 'package:stock_app/presentation/company_info/company_info_view_model.dart';
+import 'package:stock_app/presentation/company_info/component/StockChart.dart';
 
 import '../../domain/model/company_info.dart';
 
@@ -23,13 +25,13 @@ class CompanyInfoScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             ),
           if (!state.isLoading && state.errorMessage == null)
-            _buildBody(state.companyInfo!)
+            _buildBody(context, state)
         ],
       )),
     );
   }
 
-  Widget _buildBody(CompanyInfo companyInfo) {
+  Widget _buildBody(BuildContext context, CompanyInfoState state) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -37,30 +39,48 @@ class CompanyInfoScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            companyInfo.name,
+            state.companyInfo!.name,
             style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
                 overflow: TextOverflow.ellipsis),
           ),
           Text(
-            companyInfo.symbol,
+            state.companyInfo!.symbol,
             style: const TextStyle(fontStyle: FontStyle.italic),
           ),
           const Divider(),
           Text(
-            'Industry : ${companyInfo.industry}',
+            'Industry : ${state.companyInfo!.industry}',
             style: const TextStyle(overflow: TextOverflow.ellipsis),
           ),
           Text(
-            'Country : ${companyInfo.country}',
+            'Country : ${state.companyInfo!.country}',
             style: const TextStyle(overflow: TextOverflow.ellipsis),
           ),
           const Divider(),
           Text(
-            companyInfo.description,
+            state.companyInfo!.description,
             style: const TextStyle(fontSize: 12),
           ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Text(
+            '주식정보',
+            style: TextStyle(fontSize: 12),
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          if (state.stockInfos!.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: StockChart(
+                infos: state.stockInfos!,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
         ],
       ),
     );
