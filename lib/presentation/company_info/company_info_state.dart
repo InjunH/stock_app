@@ -10,7 +10,8 @@ part 'company_info_state.g.dart';
 class CompanyInfoState with _$CompanyInfoState {
   const factory CompanyInfoState(
       {CompanyInfo? companyInfo,
-      @Default(false) bool isLoading}) = _CompanyInfoState;
+      @Default(false) bool isLoading,
+      String? errorMessage}) = _CompanyInfoState;
 
   factory CompanyInfoState.fromJson(Map<String, Object?> json) =>
       _$CompanyInfoStateFromJson(json);
